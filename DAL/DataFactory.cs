@@ -20,5 +20,17 @@ namespace DAL
         {
             return new CategoryRepo(db);
         }
+        public IBookFeature BookFeature()
+        {
+            return new BookRepo(db);
+        }
+        public IRepository<Order> GetOrderRepository()
+        {
+            return new OrderRepo(db);
+        }
+        public IPaymentFeature<Payment> GetPaymentRepository()
+        {
+            return new PaymentRepo(db);
+        }
     }
 }

@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using BLL.DTOs;
+﻿using BLL.DTOs;
 using BLL.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AppLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        BookService service;
-        public BookController(BookService service)
+        OrderService service;
+        public OrderController(OrderService service)
         {
             this.service = service;
         }
+
         [HttpGet("all")]
         public IActionResult All()
         {
@@ -27,22 +28,22 @@ namespace AppLayer.Controllers
             return Ok(data);
         }
         [HttpPost("create")]
-        public IActionResult Create(BookDTO c)
+        public IActionResult Create(OrderDTO c)
         {
             var res = service.Create(c);
-            if(res == true)
+            if (res == true)
             {
-               return Ok(res);
+                return Ok(res);
             }
             else
             {
-               return BadRequest(res);
+                return BadRequest(res);
             }
         }
         [HttpPut("update/{id}")]
-        public IActionResult Update(int id,BookDTO c)
+        public IActionResult Update(int id, OrderDTO c)
         {
-            var res = service.Update(id,c);
+            var res = service.Update(id, c);
             if (res == true)
             {
                 return Ok(res);
@@ -64,15 +65,6 @@ namespace AppLayer.Controllers
             {
                 return BadRequest(res);
             }
-        }
-
-        //Functionality implemented
-        //Search Book by Title
-        [HttpGet("search/{name}")]
-        public IActionResult search(string name)
-        {
-            var data = service.GetByName(name);
-            return Ok(data);
         }
     }
 }

@@ -6,34 +6,33 @@ using System.Text;
 
 namespace DAL.EF.Repos
 {
-    public class BookRepo: IRepository<Book>, IBookFeature
+    public class OrderRepo:IRepository<Order>
     {
         UMSContext db;
-        public BookRepo(UMSContext db)
+        public OrderRepo(UMSContext db)
         {
             this.db = db;
         }
-        //Create Book
-        public bool Create(Book c)
+
+        public bool Create(Order c)
         {
-            db.Books.Add(c);
+            db.Orders.Add(c);
             return db.SaveChanges() > 0;
         }
-
         //Show all Books
-        public List<Book> Get()
+        public List<Order> Get()
         {
-            return db.Books.ToList();
+            return db.Orders.ToList();
         }
 
         //Show Book by ID
-        public Book Get(int id)
+        public Order Get(int id)
         {
-            return db.Books.Find(id);
+            return db.Orders.Find(id);
         }
 
         //Update Book
-        public bool Update(Book c)
+        public bool Update(Order c)
         {
             var ex = Get(c.Id);
             db.Entry(ex).CurrentValues.SetValues(c);
@@ -44,18 +43,8 @@ namespace DAL.EF.Repos
         public bool Delete(int id)
         {
             var ex = Get(id);
-            db.Books.Remove(ex);
+            db.Orders.Remove(ex);
             return db.SaveChanges() > 0;
-        }
-
-        //Functionality implemented
-        //Search Book by Title
-        public List<Book> GetByName(string name)
-        {
-            var book = (from b in db.Books
-                        where b.Title.Contains(name)
-                        select b).ToList();
-            return book;
         }
     }
 }

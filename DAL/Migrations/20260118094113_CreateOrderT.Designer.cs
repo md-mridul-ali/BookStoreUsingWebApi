@@ -4,6 +4,7 @@ using DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(UMSContext))]
-    partial class UMSContextModelSnapshot : ModelSnapshot
+    [Migration("20260118094113_CreateOrderT")]
+    partial class CreateOrderT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,35 +96,6 @@ namespace DAL.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("DAL.EF.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("DECIMAL");
-
-                    b.Property<int>("OId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("VARCHAR");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OId");
-
-                    b.ToTable("Payments");
-                });
-
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.HasOne("DAL.EF.Models.Category", "Category")
@@ -142,17 +116,6 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("DAL.EF.Models.Payment", b =>
-                {
-                    b.HasOne("DAL.EF.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

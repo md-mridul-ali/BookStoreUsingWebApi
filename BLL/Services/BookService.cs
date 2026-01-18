@@ -53,5 +53,15 @@ namespace BLL.Services
         {
             return factory.GetBookRepository().Delete(id);
         }
+
+        //Functionality implemented
+        //Search Book by Title
+        public List<BookDTO> GetByName(string name)
+        {
+            var data = factory.BookFeature().GetByName(name);
+            return MapperConfig.GetMapper().Map<List<BookDTO>>(data);
+
+        }
+
     }
 }

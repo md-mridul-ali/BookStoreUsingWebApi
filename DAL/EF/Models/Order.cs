@@ -6,18 +6,15 @@ using System.Text;
 
 namespace DAL.EF.Models
 {
-    public class Book
+    public class Order
     {
         [Key]
         public int Id { get; set; }
-        [StringLength(50)]
-        [Column(TypeName = "VARCHAR")]
-        public string Title { get; set; }
+        [Required]
         public int quantity { get; set; }
-        public decimal Price { get; set; }
-        [ForeignKey("Category")]
-        public int CId { get; set; }
-        public virtual Category Category { get; set; }
-
+        public DateTime OrderDate { get; set; }
+        [ForeignKey("Book")]
+        public int BId { get; set; }
+        public virtual Book Book { get; set; }  
     }
 }

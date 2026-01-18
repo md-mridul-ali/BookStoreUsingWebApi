@@ -23,6 +23,13 @@ builder.Services.AddScoped<BookRepo>();
 //BookController depends on BookService
 builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<DataFactory>();
+//OrderService depends on OrderRepo
+builder.Services.AddScoped<OrderRepo>();
+//OrderController depends on OrderService
+builder.Services.AddScoped<OrderService>();
+//PaymentService depends on PaymentRepo
+builder.Services.AddScoped<PaymentRepo>();
+builder.Services.AddScoped<PaymentService>();
 builder.Services.AddDbContext<UMSContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
 });
