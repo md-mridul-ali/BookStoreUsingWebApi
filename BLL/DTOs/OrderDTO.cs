@@ -9,6 +9,7 @@ namespace BLL.DTOs
         public int ID { get; set; }
         public int quantity { get; set; }
         public DateTime OrderDate { get; set; }
+        //public string status { get; set; }
         public int BId { get; set; }
     }
 }

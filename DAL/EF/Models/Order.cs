@@ -13,6 +13,7 @@ namespace DAL.EF.Models
         [Required]
         public int quantity { get; set; }
         public DateTime OrderDate { get; set; }
+        public string? status { get; set; }
         [ForeignKey("Book")]
         public int BId { get; set; }
         public virtual Book Book { get; set; }  

@@ -49,11 +49,11 @@ namespace BLL.Services
 
             // Create order
             var mapper = MapperConfig.GetMapper();
-            var order = mapper.Map<Order>(c);
-            order.OrderDate = DateTime.Now;
-
+            var data = mapper.Map<Order>(c);
+            data.OrderDate = DateTime.Now;
+            data.status = "OrderPlaced";
             // Save both changes
-            orderRepo.Create(order);
+            orderRepo.Create(data);
             bookRepo.Update(book);
 
             return true;

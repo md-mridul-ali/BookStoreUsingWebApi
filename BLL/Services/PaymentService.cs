@@ -30,10 +30,28 @@ namespace BLL.Services
         }
         public bool Create(PaymentDTO c)
         {
+            //var mapper = MapperConfig.GetMapper();
+            //var data = mapper.Map<Payment>(c);
+            //data.PaymentDate = DateTime.Now;
+            //return factory.GetPaymentRepository().Create(data);
+
+            var paymentRepo = factory.GetPaymentRepository();
+            var orderRepo = factory.GetOrderRepository();
+
+            var order = orderRepo.Get(c.OId);
+            if (order == null) return false;
+
             var mapper = MapperConfig.GetMapper();
-            var data = mapper.Map<Payment>(c);
-            data.PaymentDate = DateTime.Now;
-            return factory.GetPaymentRepository().Create(data);
+            var payment = mapper.Map<Payment>(c);
+            payment.PaymentDate = DateTime.Now;
+
+            // Save payment
+            paymentRepo.Create(payment);
+
+            // ⭐ Update order status after payment
+            orderRepo.UpdateStatus(c.OId, "OrderPaid");
+
+            return true;
             //var paymentRepo = factory.GetPaymentRepository();
             //var orderRepo = factory.GetOrderRepository();
 

@@ -2,6 +2,7 @@
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace DAL.EF.Repos
@@ -47,5 +48,16 @@ namespace DAL.EF.Repos
             db.Categories.Remove(ex);
             return db.SaveChanges() > 0;
         }
+
+        public bool UpdateStatus(int id, string status)
+        {
+            throw new NotImplementedException();
+        }
+
+        //additional
+        //public UpdateStatus(int id, string status)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

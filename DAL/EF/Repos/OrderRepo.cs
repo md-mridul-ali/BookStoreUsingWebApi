@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL.EF.Repos
 {
-    public class OrderRepo:IRepository<Order>
+    public class OrderRepo:IRepository<Order>, IOrderFeature<Order>
     {
         UMSContext db;
         public OrderRepo(UMSContext db)
@@ -44,6 +44,15 @@ namespace DAL.EF.Repos
         {
             var ex = Get(id);
             db.Orders.Remove(ex);
+            return db.SaveChanges() > 0;
+        }
+        //new implementation for updating order status
+        public bool UpdateStatus(int id, string status)
+        {
+            var order = db.Orders.Find(id);
+            if (order == null) return false;
+
+            order.status = status;
             return db.SaveChanges() > 0;
         }
     }

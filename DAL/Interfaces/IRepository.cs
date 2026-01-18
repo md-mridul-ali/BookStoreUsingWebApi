@@ -13,6 +13,7 @@ namespace DAL.Interfaces
         bool Create(T obj);
         bool Update(T obj);
         bool Delete(int id);
+        bool UpdateStatus(int id, string status);
 
     }
 }

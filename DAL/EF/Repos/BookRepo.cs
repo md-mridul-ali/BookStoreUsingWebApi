@@ -57,5 +57,10 @@ namespace DAL.EF.Repos
                         select b).ToList();
             return book;
         }
+        //aditional 
+        public bool UpdateStatus(int id, string status)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
